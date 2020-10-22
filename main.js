@@ -74,17 +74,17 @@ console.log(listaMine);
         alert('hai perso! hai totalizzato ' + leMiePosizioni.length + 'punti');
         // console.log(leMiePosizioni);
 
-    } else if (leMiePosizioni.includes(laMiaScelta) == false) {
+    } else if (leMiePosizioni.includes(laMiaScelta) == false && laMiaScelta < 101) {
 
         leMiePosizioni.push(laMiaScelta);
 
      } else {
-         alert('numero gia inserito');
+         alert('numero gia inserito o non valido');
      }
 
  } while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
 
- console.log(laMiaScelta);
+ console.log(leMiePosizioni);
 
 if (leMiePosizioni.length == maxPoint) {
     alert('hai vinto! hai totalizzato 84 punti');
