@@ -16,30 +16,26 @@ In ogni caso, le mine sono sempre 16.
 
 // CREIAMO UN PRIMO CICLO PER FAR SCEGLIERE IL LIVELLO E IMPOSTARE I PRIMI VALORI A SECONDA DEL LIVELLO
 
-var numeroBombeMax;
-var numeroMinimoLivello;
-var numeroMassimoLivello;
 
+var numeroCasualeMin;
+var numeroCasualeMax;
 
 do {
     var livello = parseInt(prompt('scegli il livello di difficoltà. 0=facile 1=medio 2=difficile'));
     console.log(livello);
     if (livello == 0 ) {
-        numeroBombeMax = 100;
-        numeroMinimoLivello = 1;
-        numeroMassimoLivello = 101;
+        numeroCasualeMax = 100;
+        numeroCasualeMin = 1;
         alert('su 100 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 100');
     } else if (livello == 1) {
-        numeroBombeMax = 80;
-        numeroMinimoLivello = 1;
-        numeroMassimoLivello = 81;
+        numeroCasualeMax = 80;
+        numeroCasualeMin = 1;
         alert('su 80 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 80');
     } else if (livello == 2) {
-        numeroBombeMax = 50;
-        numeroMinimoLivello = 1;
-        numeroMassimoLivello = 51;
+        numeroCasualeMax = 50;
+        numeroCasualeMin = 1;
         alert('su 50 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 50');
     } else {
@@ -52,14 +48,13 @@ do {
 
 var leMiePosizioni = [];
 var quantitaBombe = 16;
-var numeroBombeMin = 1;
-var maxPoint = numeroBombeMax - quantitaBombe;
+var maxPoint = numeroCasualeMax - quantitaBombe;
 var isBombaTrovata = false;
 
 // GENERIAMO 16 NUMERI CASUALI (MINE) CON CICLO WHILE PER EVITARE CHE SI RIPETANO
 
 
-var listaMine = generaNumero(quantitaBombe, numeroBombeMin, numeroBombeMax);
+var listaMine = generaNumero(quantitaBombe, numeroCasualeMin, numeroCasualeMax);
 console.log(listaMine);
 
 
@@ -102,7 +97,7 @@ console.log(listaMine);
         alert('hai perso! hai totalizzato ' + leMiePosizioni.length + 'punti');
         // console.log(leMiePosizioni);
 
-    } else if (leMiePosizioni.includes(laMiaScelta) == false && laMiaScelta < numeroMassimoLivello && laMiaScelta >= numeroMinimoLivello) {
+    } else if (leMiePosizioni.includes(laMiaScelta) == false && laMiaScelta <= numeroCasualeMax && laMiaScelta >= numeroCasualeMin) {
 
         leMiePosizioni.push(laMiaScelta);
 
