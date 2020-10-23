@@ -14,43 +14,50 @@ In ogni caso, le mine sono sempre 16.
 */
 
 
-// CREIAMO UN PRIMO CICLO PER FAR SCEGLIERE IL LIVELLO E IMPOSTARE I PRIMI VALORI A SECONDA DEL LIVELLO
-
-
-var numeroCasualeMin;
-var numeroCasualeMax;
-
-do {
-    var livello = parseInt(prompt('scegli il livello di difficoltà. 0=facile 1=medio 2=difficile'));
-    console.log(livello);
-    if (livello == 0 ) {
-        numeroCasualeMax = 100;
-        numeroCasualeMin = 1;
-        alert('su 100 numeri 16 possono farti perdere');
-        alert('puoi inserire solo numeri da 1 a 100');
-    } else if (livello == 1) {
-        numeroCasualeMax = 80;
-        numeroCasualeMin = 1;
-        alert('su 80 numeri 16 possono farti perdere');
-        alert('puoi inserire solo numeri da 1 a 80');
-    } else if (livello == 2) {
-        numeroCasualeMax = 50;
-        numeroCasualeMin = 1;
-        alert('su 50 numeri 16 possono farti perdere');
-        alert('puoi inserire solo numeri da 1 a 50');
-    } else {
-        alert('valore non valido');
-    }
-
-} while (livello != 0 && livello !=1 && livello !=2);
-
-
 // CREIAMO DELLE VAR IN MODO DA NON TOCCARE NEL CODICE IN FUTURO MA MODIFICARE QUESTE PER MODIFICARE IL GIOCO
 
 var leMiePosizioni = [];
-var quantitaBombe = 16;
-var maxPoint = numeroCasualeMax - quantitaBombe;
 var isBombaTrovata = false;
+var quantitaBombe = 16;
+var numeroCasualeMin;
+var numeroCasualeMax;
+
+// CREIAMO UN PRIMO CICLO PER FAR SCEGLIERE IL LIVELLO E IMPOSTARE I PRIMI VALORI A SECONDA DEL LIVELLO
+
+var livelloDifficolta = scegliLivello();
+console.log(livelloDifficolta);
+
+// conosco il livello. calcolo nmax, nmin, nbombe
+
+
+switch (livelloDifficolta) {
+    case 0:
+        numeroCasualeMax = 100;
+        numeroCasualeMin = 1;
+        alert(' su ' + numeroCasualeMax + ' numeri ' + quantitaBombe + ' possono farti perdere')
+        alert('puoi inserire solo numeri da ' + numeroCasualeMin + ' a ' + numeroCasualeMax);
+    break;
+    case 1:
+        numeroCasualeMax = 80;
+        numeroCasualeMin = 1;
+        alert(' su ' + numeroCasualeMax + ' numeri ' + quantitaBombe + ' possono farti perdere')
+        alert('puoi inserire solo numeri da ' + numeroCasualeMin + ' a ' + numeroCasualeMax);
+    break;
+    case 2:
+        numeroCasualeMax = 50;
+        numeroCasualeMin = 1;
+        alert(' su ' + numeroCasualeMax + ' numeri ' + quantitaBombe + ' possono farti perdere')
+        alert('puoi inserire solo numeri da ' + numeroCasualeMin + ' a ' + numeroCasualeMax);
+    break;
+
+    default:
+        alert('default');
+
+}
+
+// CREIAMO VAR DEL CALCOLO PUNTEGGIO SOLO DOPO CHE HO DATO UN VALORE ALLE VAR DEL CALCOLO
+
+var maxPoint = numeroCasualeMax - quantitaBombe;
 
 // GENERIAMO 16 NUMERI CASUALI (MINE) CON CICLO WHILE PER EVITARE CHE SI RIPETANO
 
@@ -67,24 +74,6 @@ console.log(listaMine);
 
 // SE ANDIAMO AVANTI CHIEDIAMO UN ALTRO NUMERO
 
-// ALLA FINE DEL GIOCO DICIAMO QUANTI NUMERI è RIUSCITO A INSERIRE SENZA SBAGLIARE (QUANTI CICLI) = PUNTEGGIO
-
-/*
-
- do {
-     var sceltaUtente = parseInt(prompt('inserisci un numero'));
-     if (listaMine.includes(sceltaUtente) == false) {
-         leMiePosizioni.push(sceltaUtente);
-
-     } else {
-         isBombaTrovata = true;
-     }
-
- } while (isBombaTrovata == false);
-
- // ATTENZIONE!! ALCUNI PROGRAMMI NON VOGLIONO CHE LA VARIABILE INTERNA AL CICLO SIA NELLA CONDIZIONE PERCHE' LA VISIBILITA' DELLE VARIABILI E' LIMITATA ALLE PARENTESI GRAFFE
- // QUINDI FACCIAMO IN UN ALTRO METODO
-*/
 
 do {
     var sceltaUtente = parseInt(prompt('inserisci un numero'));
@@ -109,6 +98,9 @@ do {
 } while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
 
 console.log(leMiePosizioni);
+
+// ALLA FINE DEL GIOCO DICIAMO QUANTI PUNTI E' RIUSCITO A FARE 
+
 
 if (leMiePosizioni.length == maxPoint) {
     alert('hai vinto! hai totalizzato ' + maxPoint + ' punti');
@@ -153,4 +145,18 @@ function isNumeroValido(arrayUtente, numero, numeroMin, numeroMax) {
     } else {
         return false;
     }
+}
+
+// FUNZIONE PER SCEGLIERE IL LIVELLO DI DIFFICOLTA'
+
+function scegliLivello() {
+    do {
+        var livello = parseInt(prompt('scegli il livello di difficoltà. 0=facile 1=medio 2=difficile'));
+        console.log(livello);
+        if (livello != 0 && livello != 1 && livello != 2) {
+            alert('valore non valido');
+        }
+    } while (livello != 0 && livello !=1 && livello !=2);
+
+    return livello;
 }
