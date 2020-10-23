@@ -16,25 +16,30 @@ In ogni caso, le mine sono sempre 16.
 
 // CREIAMO UN PRIMO CICLO PER FAR SCEGLIERE IL LIVELLO E IMPOSTARE I PRIMI VALORI A SECONDA DEL LIVELLO
 
+var numeroBombeMax;
+var numeroMinimoLivello;
+var numeroMassimoLivello;
+
+
 do {
     var livello = parseInt(prompt('scegli il livello di difficoltà. 0=facile 1=medio 2=difficile'));
     console.log(livello);
     if (livello == 0 ) {
-        var numeroBombeMax = 100;
-        var numeroMinimoLivello = 1;
-        var numeroMassimoLivello = 101;
+        numeroBombeMax = 100;
+        numeroMinimoLivello = 1;
+        numeroMassimoLivello = 101;
         alert('su 100 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 100');
     } else if (livello == 1) {
-        var numeroBombeMax = 80;
-        var numeroMinimoLivello = 1;
-        var numeroMassimoLivello = 81;
+        numeroBombeMax = 80;
+        numeroMinimoLivello = 1;
+        numeroMassimoLivello = 81;
         alert('su 80 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 80');
     } else if (livello == 2) {
-        var numeroBombeMax = 50;
-        var numeroMinimoLivello = 1;
-        var numeroMassimoLivello = 51;
+        numeroBombeMax = 50;
+        numeroMinimoLivello = 1;
+        numeroMassimoLivello = 51;
         alert('su 50 numeri 16 possono farti perdere');
         alert('puoi inserire solo numeri da 1 a 50');
     } else {
@@ -44,7 +49,7 @@ do {
 } while (livello != 0 && livello !=1 && livello !=2);
 
 // CREIAMO DELLE VAR IN MODO DA NON TOCCARE NEL CODICE IN FUTURO MA MODIFICARE QUESTE PER MODIFICARE IL GIOCO
-var listaMine = [];
+
 var leMiePosizioni = [];
 var quantitaBombe = 16;
 var numeroBombeMin = 1;
@@ -53,14 +58,8 @@ var isBombaTrovata = false;
 
 // GENERIAMO 16 NUMERI CASUALI (MINE) CON CICLO WHILE PER EVITARE CHE SI RIPETANO
 
-while (listaMine.length < quantitaBombe) {
-    var minaRandom = getRandomNumbers(numeroBombeMin, numeroBombeMax);
-    // console.log(mine);
-    if (listaMine.includes(minaRandom) == false) {
-        // se mine non è già incluso in array_mine allora lo pushamo
-        listaMine.push(minaRandom);
-    }
-}
+
+var listaMine = generaNumero(quantitaBombe, numeroBombeMin, numeroBombeMax);
 console.log(listaMine);
 
 
@@ -134,4 +133,18 @@ function isUnaMina(sceltaUtente, arrayMine) {
         controllo = true;
     }
     return controllo;
+}
+
+function generaNumero(nBombe, nMin, nMax) {
+    var listaBombe = [];
+
+    while (listaBombe.length < nBombe) {
+        var minaRandom = getRandomNumbers(nMin, nMax);
+        // console.log(mine);
+        if (listaBombe.includes(minaRandom) == false) {
+            // se mine non è già incluso in array_mine allora lo pushamo
+            listaBombe.push(minaRandom);
+        }
+    }
+    return listaBombe;
 }
