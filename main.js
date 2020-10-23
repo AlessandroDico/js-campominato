@@ -44,6 +44,7 @@ do {
 
 } while (livello != 0 && livello !=1 && livello !=2);
 
+
 // CREIAMO DELLE VAR IN MODO DA NON TOCCARE NEL CODICE IN FUTURO MA MODIFICARE QUESTE PER MODIFICARE IL GIOCO
 
 var leMiePosizioni = [];
@@ -122,9 +123,9 @@ function getRandomNumbers(min, max) {
 }
 
 // FUNZIONE PER VERIFICARE SE UN NUMERO UTENTE E' UGUALE A UN NUMERO MINA
-function isUnaMina(sceltaUtente, arrayMine) {
+function isUnaMina(numeroUtente, arrayMine) {
     var controllo = false;
-    if (arrayMine.includes(sceltaUtente) == true) {
+    if (arrayMine.includes(numeroUtente) == true) {
         controllo = true;
     }
     return controllo;
@@ -145,7 +146,7 @@ function generaNumero(nBombe, nMin, nMax) {
     return listaBombe;
 }
 
-// FUNZIONE PER VERIFICARE CONDIZIONE DI PUSHAGGIO SCELTA UTENTE 
+// FUNZIONE PER VERIFICARE CONDIZIONE DI PUSHAGGIO SCELTA UTENTE
 function isNumeroValido(arrayUtente, numero, numeroMin, numeroMax) {
     if (arrayUtente.includes(numero) == false && numero <= numeroMax && numero >= numeroMin) {
         return true;
