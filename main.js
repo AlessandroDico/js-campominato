@@ -71,9 +71,9 @@ console.log(listaMine);
 /*
 
  do {
-     var laMiaScelta = parseInt(prompt('inserisci un numero'));
-     if (listaMine.includes(laMiaScelta) == false) {
-         leMiePosizioni.push(laMiaScelta);
+     var sceltaUtente = parseInt(prompt('inserisci un numero'));
+     if (listaMine.includes(sceltaUtente) == false) {
+         leMiePosizioni.push(sceltaUtente);
 
      } else {
          isBombaTrovata = true;
@@ -85,29 +85,29 @@ console.log(listaMine);
  // QUINDI FACCIAMO IN UN ALTRO METODO
 */
 
- do {
-     var laMiaScelta = parseInt(prompt('inserisci un numero'));
+do {
+    var sceltaUtente = parseInt(prompt('inserisci un numero'));
 
-     var isGameOver = isUnaMina(laMiaScelta, listaMine);
+    var isGameOver = isUnaMina(sceltaUtente, listaMine);
 
-     if (isGameOver == true) {
+    if (isGameOver == true) {
 
         isBombaTrovata = true;
 
         alert('hai perso! hai totalizzato ' + leMiePosizioni.length + 'punti');
         // console.log(leMiePosizioni);
 
-    } else if (leMiePosizioni.includes(laMiaScelta) == false && laMiaScelta <= numeroCasualeMax && laMiaScelta >= numeroCasualeMin) {
+    } else if (isNumeroValido(leMiePosizioni, sceltaUtente, numeroCasualeMin, numeroCasualeMax)) {
 
-        leMiePosizioni.push(laMiaScelta);
+        leMiePosizioni.push(sceltaUtente);
 
-     } else {
-         alert('numero gia inserito o valore non valido');
-     }
+    } else {
+        alert('numero gia inserito o valore non valido');
+    }
 
- } while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
+} while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
 
- console.log(leMiePosizioni);
+console.log(leMiePosizioni);
 
 if (leMiePosizioni.length == maxPoint) {
     alert('hai vinto! hai totalizzato ' + maxPoint + ' punti');
@@ -121,7 +121,7 @@ function getRandomNumbers(min, max) {
     return random_number;
 }
 
-
+// FUNZIONE PER VERIFICARE SE UN NUMERO UTENTE E' UGUALE A UN NUMERO MINA
 function isUnaMina(sceltaUtente, arrayMine) {
     var controllo = false;
     if (arrayMine.includes(sceltaUtente) == true) {
@@ -130,6 +130,7 @@ function isUnaMina(sceltaUtente, arrayMine) {
     return controllo;
 }
 
+// FUNZIONE PER GENERARE(IN QUESTO CASO 16 ( 16=quantitaBombe)) NUMERI CASUALI DIVERSI TRA LORO
 function generaNumero(nBombe, nMin, nMax) {
     var listaBombe = [];
 
@@ -142,4 +143,13 @@ function generaNumero(nBombe, nMin, nMax) {
         }
     }
     return listaBombe;
+}
+
+// FUNZIONE PER VERIFICARE CONDIZIONE DI PUSHAGGIO SCELTA UTENTE 
+function isNumeroValido(arrayUtente, numero, numeroMin, numeroMax) {
+    if (arrayUtente.includes(numero) == false && numero <= numeroMax && numero >= numeroMin) {
+        return true;
+    } else {
+        return false;
+    }
 }
