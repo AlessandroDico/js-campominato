@@ -116,7 +116,7 @@ console.log(listaMine);
  console.log(leMiePosizioni);
 
 if (leMiePosizioni.length == maxPoint) {
-    alert('hai vinto! hai totalizzato 84 punti');
+    alert('hai vinto! hai totalizzato ' + maxPoint + ' punti');
 }
 
 
